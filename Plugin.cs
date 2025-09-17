@@ -4,6 +4,7 @@ using Gatekeeper.Utility;
 using GKAPI;
 using GKAPI.Achievements;
 using GKAPI.Items;
+using MoreItems.Content;
 
 namespace MoreItems;
 
@@ -35,10 +36,11 @@ public class Plugin : GkPlugin
 
         GlobalSettings.Instance.buildCheating = true;
         GlobalSettings.Instance.buildDebugConsole = true;
+        ItemAPI itemAPI = ItemAPI.Instance;
+        AchievementsAPI achievementsAPI = AchievementsAPI.Instance;
 
-        var achievementAPI = AchievementsAPI.Instance;
-        var baseAchievement = achievementAPI.AddAchievement(new GkAchievement.Builder());
 
-        var itemAPI = ItemAPI.Instance;
+        ItemRegisterer itemRegister = new(itemAPI);
+        itemRegister.Register();
     }
 }
