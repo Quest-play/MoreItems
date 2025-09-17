@@ -1,0 +1,32 @@
+<Project Sdk="Microsoft.NET.Sdk">
+    <Import Project="MoreItems.props" />
+
+     <PropertyGroup>
+        <TargetFramework>net6.0</TargetFramework>
+        <AssemblyName>MoreItems</AssemblyName>
+        <Product>MoreItems</Product>
+        <Authors>Quest_play</Authors>
+        <Version>0.1.0</Version>
+        <PackageId>MoreItems</PackageId>
+        <Title>MoreItems</Title>
+        <AllowUnsafeBlocks>true</AllowUnsafeBlocks>
+        <LangVersion>latest</LangVersion>
+        <RestoreAdditionalProjectSources>
+            https://api.nuget.org/v3/index.json;
+            https://nuget.bepinex.dev/v3/index.json;
+            https://nuget.samboy.dev/v3/index.json
+        </RestoreAdditionalProjectSources>
+        <RootNamespace>MoreItems</RootNamespace>
+
+        <RepositoryUrl>https://github.com/Quest-play/MoreItems</RepositoryUrl>
+        <PackageProjectUrl>https://github.com/Quest-play/MoreItems</PackageProjectUrl>
+        <Copyright>Copyright © 2025 Quest-play</Copyright>
+        <PackageLicenseFile>LICENSE</PackageLicenseFile>
+        <PackageReadmeFile>README.md</PackageReadmeFile>
+    </PropertyGroup>
+
+    <Target Name="PostBuild" AfterTargets="PostBuildEvent" Condition=" '$(IsDevEnv)'=='true' ">
+        <Exec Command="xcopy /q /Y &quot;$(TargetDir)$(ProjectName).dll&quot; &quot;C:\Program Files (x86)\Steam\steamapps\common\Gatekeeper\BepInEx\plugins&quot; &gt; nul" />
+        <Exec Command="python ../../Tools/autoversion/versioner.py $(ProjectName)" />
+    </Target>
+</Project>
