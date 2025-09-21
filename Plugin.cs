@@ -42,5 +42,8 @@ public class Plugin : GkPlugin
 
         ItemRegisterer itemRegister = new(itemAPI);
         itemRegister.Register();
+
+        AchievmentRegisterer achievmentRegisterer = new(achievementsAPI, [.. itemRegister.getItemList()]);
+        achievmentRegisterer.Register();
     }
 }
