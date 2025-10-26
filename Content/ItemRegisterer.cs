@@ -3,6 +3,8 @@ using ColorLib;
 using static ColorLib.Colors;
 using GKAPI.Items;
 using Gatekeeper.Items;
+using UnityEngine;
+using System.IO;
 
 namespace MoreItems.Content;
 
@@ -58,6 +60,23 @@ class ItemRegisterer(ItemAPI api)
         .AddModification(ItemParamModificationType.ResectoidChancePerc, 0.1f, 0.04f)
         .AddModification(ItemParamModificationType.InertiaChancePerc, 0.05f, 0.04f)
         .AddModification(ItemParamModificationType.HvcChancePerc, 0.1f, 0.04f)
+        );
+
+        //Scrap
+        GkItem scrapModifier = itemAPI.AddItem(new GkItem.Builder("Basic Scrap", "A piece of unknown material. Can be used in a forge to create items.", "Does nothing")
+        .SetHidden(false)
+        .SetUnlocked(true)
+        .AsModifier()
+        .WithScrapValue(15)
+        .WithDropSource(ItemDropSource.EnemyDeath | ItemDropSource.Pedestal | ItemDropSource.Obelisks | ItemDropSource.EndOfRound)
+        );
+
+        GkItem scrapStructure = itemAPI.AddItem(new GkItem.Builder("Better Scrap", "A piece of unknown material. Can be used in a forge to create items.", "Does nothing")
+        .SetHidden(false)
+        .SetUnlocked(true)
+        .AsStructureChanger()
+        .WithScrapValue(45)
+        .WithDropSource(ItemDropSource.EnemyDeath | ItemDropSource.Pedestal | ItemDropSource.Obelisks | ItemDropSource.EndOfRound)
         );
 
         ItemList.AddRange([cloverItem]);

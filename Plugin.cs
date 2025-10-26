@@ -15,6 +15,8 @@ public class Plugin : GkPlugin
     public const string PluginGuid = "ua.quest_play.moreitems";
     public const string PluginName = "MoreItems";
     private const string PluginVersion = "0.1.0";
+    public const string Author = "Quest_play";
+    public const string ThunderStoreFolder = Author + "-" + PluginName;
     
     internal new static ManualLogSource Log;
 
@@ -28,11 +30,6 @@ public class Plugin : GkPlugin
 
     public override void AddContent()
     {
-        if (EventHandler.State != EventHandler.LoadingState.PreInit)
-        {
-            Log.LogError("Content has to be added during Pre-Init!");
-            return;
-        }
 
         GlobalSettings.Instance.buildCheating = true;
         GlobalSettings.Instance.buildDebugConsole = true;
